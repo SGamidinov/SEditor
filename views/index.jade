@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  //- h2= title
+  div.head
+    div.user
+      h2 Guest
+      input.login
+    div.title
+      h2 Unnamed
+
+    
+  div.container
+    div
+      form(method="GET" action="/shortlink")
+        input#short-link(name="shortlink" placeholder="enter short link" required)
+        button#go(type="submit") GO
+    div.code
+      textarea#code-area(width="640px")
+    div.navigation
+      .save
+        form(method="post")
+          button#save Save
+      .run
+        button#run Run >
+    div#runner
+
+    div.log
+      textarea#log(width="640px")
+
+  script(src="javascripts/jquery/dist/jquery.min.js")
+  script(src="javascripts/main.js")

@@ -1,0 +1,52 @@
+body {
+  padding: 50px;
+  padding-top: 5px;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #F0F0E0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#code-area {
+  width: 960px;
+  max-width: 960px;
+  height: 320px;
+  max-height: 320px;
+  font-size: 16px;
+}
+
+.navigation {
+  width: 160px;
+  max-width: 160px;
+  display: inline-block !important;
+}
+
+.save {
+  float: left;
+}
+
+.run {
+  float: right;
+}
+
+#log {
+  width: 470px;
+  max-width: 470px;
+  height: 169px;
+  max-height: 169px;
+}
+
+.head {
+  width: 960px;
+  display: inline-block;
+}
+
+.title {
+  float: left;
+}
+
+.user {
+  float: right;
+}
