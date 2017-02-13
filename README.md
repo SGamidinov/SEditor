@@ -1,0 +1,2 @@
+# SEditor
+Simple editor
