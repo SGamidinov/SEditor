@@ -4,8 +4,15 @@ var db = require('../mongoose/db');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'SEditor', user: 'currentUser' });
+  res.render('index', { title: 'SEditor', user: 'currentUser', source: 'result.source' });
 });
+
+router.get('/viewone', function (res, req, next) {
+  db.collections.findOne({ _id: req.query.shortlink }, function (err, result) {
+    if (err) { return next(err); }
+    res.render('index', { title: 'SEditor', user: 'currentUser', source: result.source });
+  })
+})
 
 router.get('/shortlink', function (req, res, next) {
   db.collections.findOne({ _id: req.query.shortlink }, function (err, result) {
@@ -17,7 +24,7 @@ router.get('/shortlink', function (req, res, next) {
     };
 
     if (result != null) {
-      res.send({ code: result.source });
+      res.send({ code: result.source,  });
     };
   });
   console.log(req.query.shortlink + ' hey');
@@ -32,10 +39,19 @@ router.post('/save', function (req, res) {
 });
 
 router.post('/login', function(req, res, next) {
-  var inst = db.Snip({ name: req.body.cren });
-  console.log(req.body.cren);
-  db.Save(inst);
-  res.send(JSON.stringify(req.body));
+  db.Snip.findOne({ name: req.body.cren }, function (err, user) {
+    if (err) return next(err);
+    if (user == null) {
+      var inst = db.Snip({ name: req.body.cren });
+      console.log(req.body.cren);
+      db.Save(inst);
+      console.log(inst.name);
+      res.send({ name: inst.name });
+      return;
+    }
+    console.log(user.name);
+    res.send({name: user.name});
+  });
 });
 
 router.get('/all', function (req, res) {
@@ -43,12 +59,21 @@ router.get('/all', function (req, res) {
 });
 
 router.get('/allget', function (req, res, next) {
-  db.collections.find({ owner: req.query.keyword }, function (err, result) {
+  db.collections.find({}, req.query.keyword, function (err, results) {
     if (err) return next(err);
-    res.send({ status: 'looking for query -------', result: result })
+    if (results == null) {
+      // statement
+      res.end('here we go')
+      return;
+    }
+    var dict = {};
+    console.log(results);
+    for( var i = 0; i < results.length; i++ ) {
+      console.log(results[i])
+    }
+    res.send({ status: 'looking for query -------', result: 'result' })
   })
   // res.render('all')
 });
-
 
 module.exports = router;

@@ -10,3 +10,12 @@ document.getElementById('view').addEventListener('click', function (e) {
     console.log(result);
   });
 })
+
+function opener (elements) {
+  elements.forEach( function(element, index) {
+    element[index].addEventListener('click', function (e) {
+      /* body... */
+      window.location.replace(window.location.host + '/view?shortlink=' + '58a32b5e86d6bd219d94a08e');
+    })
+  });
+}

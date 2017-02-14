@@ -54,3 +54,20 @@ a {
 #login {
   display: none;
 }
+
+.container {
+  padding-top: 60px;
+}
+
+.codeAll {
+  padding-left: -20px !important;
+  border: 2px solid gray;
+  background-color: gray;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+  
+.codeAll:hover {
+  transform: scale(1.01,1.1)
+}

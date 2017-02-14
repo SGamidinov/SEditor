@@ -21,7 +21,8 @@ document.getElementById('save').addEventListener('click', function (e) {
   var source = document.getElementById('code-area').value;
   console.log(source + 'ex');
   var name = prompt('Enter name for example');
-  var owner = $('#usr').val();
+  if (name == null) return false;
+  var owner = $('#usr').innerText;
   $.ajax({
     method: "POST",
     url: "/save",
@@ -81,6 +82,6 @@ document.getElementById('let').addEventListener('click', function (e) {
     console.log(msg);
     l.style.display = '';
     f.style.display = 'none'
-    l.innerHTML = msg;
+    l.innerHTML = msg.name;
   })
 });
