@@ -1,20 +1,25 @@
 extends layout
 
 block content
-  //- h2= title
   div.head
     div.user
-      h2 Guest
-      input.login
+      h2#usr Guest
+      input#uid(value='new' style="display: none")
+      div#login
+        form(method="post" action="/login")
+          input(type="text" name="cren" required)
+          br
+          button#let(type="submit") Login/Register
     div.title
-      h2 Unnamed
+      h2.name Unnamed
 
-    
   div.container
     div
       form(method="GET" action="/shortlink")
         input#short-link(name="shortlink" placeholder="enter short link" required)
         button#go(type="submit") GO
+      div
+        input#linkto(readonly)
     div.code
       textarea#code-area(width="640px")
     div.navigation
@@ -26,7 +31,6 @@ block content
     div#runner
 
     div.log
-      textarea#log(width="640px")
+      textarea#log(width="640px" readonly)
 
-  script(src="javascripts/jquery/dist/jquery.min.js")
   script(src="javascripts/main.js")

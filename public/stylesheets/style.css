@@ -1,8 +1,8 @@
 body {
   padding: 50px;
   padding-top: 5px;
-  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #F0F0E0;
+  font: 26px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #EDEEF0;
 }
 
 a {
@@ -49,4 +49,8 @@ a {
 
 .user {
   float: right;
+}
+
+#login {
+  display: none;
 }

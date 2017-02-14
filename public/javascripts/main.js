@@ -12,7 +12,7 @@ document.getElementById('go').addEventListener('click', function (e) {
   }).done(function (msg) {
     console.log(msg);
     $('#code-area').val('');
-    $('#code-area').val(msg);
+    $('#code-area').val(msg.code);
   });
 });
 
@@ -21,14 +21,16 @@ document.getElementById('save').addEventListener('click', function (e) {
   var source = document.getElementById('code-area').value;
   console.log(source + 'ex');
   var name = prompt('Enter name for example');
+  var owner = $('#usr').val();
   $.ajax({
     method: "POST",
     url: "/save",
-    data: { source: $('#code-area').val(), name: name }
+    data: { source: $('#code-area').val(), name: name, owner: 'said' }
   }).done(function (msg) {
     console.log(msg);
     console.log(name)
-    $('.title').html(name);
+    $('.name').html(name);
+    $('#linkto').val(msg.link)
   });
 });
 
@@ -38,7 +40,7 @@ document.getElementById('run').addEventListener('click', function (e) {
   var that = this;
   setTimeout(function () {
     that.innerHTML = 'Run >';
-  }, 3000);
+  }, 1000);
   runner($('#code-area').val())
 })
 
@@ -46,17 +48,39 @@ document.getElementById('run').addEventListener('click', function (e) {
 function ee() {
   console.log('all things ')
 }
-// function runner
 
+// function runner
 function runner (source) {
   var rzone = document.createElement('script');
   rzone.text = "try {" + source + "} catch (e) { document.getElementById('log').innerHTML += e }";
   var runn = document.getElementById('runner')
   try {
-    // eval(source);
     runn.appendChild(rzone)
     document.getElementById('log').innerHTML += '\n';
   } catch (e) {
-    alert(e)
+    alert(e);
   }
 }
+
+var l = document.getElementById('usr');
+var f = document.getElementById('login');
+
+l.addEventListener('click', function () {
+  this.style.display = 'none';
+  var inp = document.getElementById('login');
+  inp.style.display = 'block';
+});
+
+document.getElementById('let').addEventListener('click', function (e) {
+  e.preventDefault();
+  $.ajax({
+    method: "POST",
+    url: "/login",
+    data: { cren: $('[name="cren"]').val() }
+  }).done(function (msg) {
+    console.log(msg);
+    l.style.display = '';
+    f.style.display = 'none'
+    l.innerHTML = msg;
+  })
+});
